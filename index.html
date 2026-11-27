@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi Agenda de Medicamentos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./Style/style.css">
+</head>
+<body>
+<header>
+    <p id="reloj" aria-live="off">--:--</p>
+    <p id="fecha-hoy"></p>
+    <button id="btn-alarmas" type="button">Activar alarmas</button>
+</header>
+
+<main>
+    <nav class="tabs" aria-label="Secciones">
+        <button class="tab activa" data-vista="hoy" type="button">Hoy</button>
+        <button class="tab" data-vista="medicinas" type="button">Mis medicinas</button>
+        <button class="tab" data-vista="historial" type="button">Historial</button>
+    </nav>
+
+    <section id="vista-hoy">
+        <h1>Tomas de hoy</h1>
+        <ul id="lista-hoy" class="lista"></ul>
+    </section>
+
+    <section id="vista-medicinas" hidden>
+        <h1>Mis medicinas</h1>
+        <form id="form-med">
+            <input type="hidden" id="med-id">
+            <label for="med-nombre">Nombre del medicamento</label>
+            <input type="text" id="med-nombre" required placeholder="Ej. Metformina">
+
+            <label for="med-dosis">Dosis</label>
+            <input type="text" id="med-dosis" required placeholder="Ej. 1 pastilla de 500 mg">
+
+            <label for="med-hora">Hora de la primera toma</label>
+            <input type="time" id="med-hora" required>
+
+            <label for="med-cada">Repetir cada (horas)</label>
+            <input type="number" id="med-cada" min="1" max="24" value="8" required>
+
+            <label for="med-notas">Para qué sirve / notas</label>
+            <input type="text" id="med-notas" placeholder="Ej. Para el azúcar, con comida">
+
+            <button type="submit" id="btn-guardar">Guardar medicina</button>
+            <button type="button" id="btn-cancelar" hidden>Cancelar edición</button>
+        </form>
+        <ul id="lista-medicinas" class="lista"></ul>
+    </section>
+
+    <section id="vista-historial" hidden>
+        <h1>Historial</h1>
+        <label for="hist-fecha">Día a consultar</label>
+        <input type="date" id="hist-fecha">
+        <ul id="lista-historial" class="lista"></ul>
+    </section>
+</main>
+
+<!-- Ventana de alarma -->
+<div id="alarma" class="alarma" role="alertdialog" aria-labelledby="alarma-titulo" hidden>
+    <div class="alarma-caja">
+        <p id="alarma-titulo">Es hora de tomar</p>
+        <p id="alarma-nombre"></p>
+        <p id="alarma-dosis"></p>
+        <button id="alarma-tomada" type="button">Ya la tomé</button>
+        <button id="alarma-posponer" type="button">Recordarme en 10 minutos</button>
+    </div>
+</div>
+
+<p id="mensaje" role="status"></p>
+<script src="./App/app.js"></script>
+</body>
+</html>
